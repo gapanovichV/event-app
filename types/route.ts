@@ -1,3 +1,4 @@
 export enum RouteType {
-  MAIN = '/'
+  MAIN = '/',
+  CAT = "/cat"
 }
