@@ -7,7 +7,9 @@ interface HeaderProps {}
 const Header = () => {
   return (
     <header className={clsx(styles.header)}>
-      <Logo />
+      <div className={clsx("container", styles.header__container)}>
+        <Logo />
+      </div>
     </header>
   )
 }

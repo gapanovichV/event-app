@@ -4,3 +4,13 @@
 * {
   box-sizing: border-box;
 }
+
+body {
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1535px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
