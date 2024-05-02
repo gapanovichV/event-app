@@ -1,4 +1,6 @@
 export enum RouteType {
   MAIN = '/',
-  CAT = "/cat"
+  CREATE_EVENT = "/create-event",
+  PROFILE = "/profile",
+  LOGIN = "/login"
 }
