@@ -1,5 +1,7 @@
+import clsx from "clsx"
+
 const MainPage = () => {
-  return <main>Main page</main>
+  return <main className={clsx("container")}>Main page</main>
 }
 
 export default MainPage

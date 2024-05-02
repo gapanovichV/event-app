@@ -3,6 +3,7 @@ import styles from "@/styles/header/index.module.scss"
 import Logo from "@/components/elements/Logo/Logo"
 import NavLink from "@/components/elements/NavLink/NavLink"
 import { RouteType } from "@/types/route"
+import Login from "@/components/elements/Login/Login"
 
 interface HeaderProps {}
 
@@ -11,7 +12,12 @@ const Header = () => {
     <header className={clsx(styles.header)}>
       <div className={clsx("container", styles.header__container)}>
         <Logo />
-        <NavLink text={"Category"} />
+        <nav className={clsx(styles.header__links)}>
+          <NavLink text={"Home"} href={RouteType.MAIN} />
+          <NavLink text={"Create Event"} href={RouteType.CREATE_EVENT}/>
+          <NavLink text={"My Profile"} href={RouteType.PROFILE}/>
+        </nav>
+        <Login/>
       </div>
     </header>
   )

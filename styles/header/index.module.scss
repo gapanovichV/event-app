@@ -3,5 +3,13 @@
   &__container {
     padding-top: 28px !important;
     padding-bottom: 28px !important;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__links {
+    display: flex;
+    align-items: center;
+    gap: 20px;
   }
 }
