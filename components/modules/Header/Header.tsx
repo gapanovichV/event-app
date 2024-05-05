@@ -14,10 +14,10 @@ const Header = () => {
         <Logo />
         <nav className={clsx(styles.header__links)}>
           <NavLink text={"Home"} href={RouteType.MAIN} />
-          <NavLink text={"Create Event"} href={RouteType.CREATE_EVENT}/>
-          <NavLink text={"My Profile"} href={RouteType.PROFILE}/>
+          <NavLink text={"Create Event"} href={RouteType.CREATE_EVENT} />
+          <NavLink text={"My Profile"} href={RouteType.PROFILE} />
         </nav>
-        <Login/>
+        <Login />
       </div>
     </header>
   )
