@@ -9,7 +9,7 @@ interface NavLinkProps {
   href?: RouteType
 }
 
-const NavLink = ({className, text, href}: NavLinkProps) => {
+const NavLink = ({ className, text, href }: NavLinkProps) => {
   return (
     <Link className={clsx(styles.nav_link, className)} href={href || RouteType.MAIN}>
       {text}

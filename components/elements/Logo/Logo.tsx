@@ -6,7 +6,7 @@ import style from "@/styles/logo/logo.module.scss"
 interface LogoProps {
   className?: string
 }
-const Logo = ({className}: LogoProps) => {
+const Logo = ({ className }: LogoProps) => {
   return (
     <Link className={clsx(style.logo)} href={RouteType.MAIN}>
       Eventhard
