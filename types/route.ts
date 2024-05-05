@@ -3,5 +3,6 @@ export enum RouteType {
   CREATE_EVENT = "/create",
   UPDATE_EVENT = "/update",
   PROFILE = "/profile",
-  LOGIN = "/login"
+  SIGN_IN = "/sign-in",
+  SIGN_UP = "/sign-up",
 }

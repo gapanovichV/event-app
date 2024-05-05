@@ -1,8 +1,8 @@
 import clsx from "clsx"
-import styles from "@/styles/header/index.module.scss"
-import Logo from "@/components/elements/Logo/Logo"
-import Login from "@/components/elements/Login/Login"
+import Logo from "@/components/elements/logo/Logo"
+import Login from "@/components/elements/login/Login"
 import Navbar from "@/components/elements/navbar/Navbar"
+import styles from "./Header.module.scss"
 
 interface HeaderProps {}
 

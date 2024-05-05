@@ -1,7 +1,7 @@
 import clsx from "clsx"
 import Link from "next/link"
 import { RouteType } from "@/types/route"
-import style from "@/styles/logo/logo.module.scss"
+import style from "./Logo.module.scss"
 
 interface LogoProps {
   className?: string
