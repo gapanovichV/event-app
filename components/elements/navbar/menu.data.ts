@@ -1,17 +1,17 @@
 import { IMenuItem } from "@/components/elements/navbar/menu.interface"
-import { RouteType } from "@/types/route"
+import { RouteEnum } from "@/types/route.interface"
 
 export const menu: IMenuItem[] = [
   {
     name: "Home",
-    link: RouteType.MAIN
+    link: RouteEnum.MAIN
   },
   {
     name: "Create Event",
-    link: RouteType.CREATE_EVENT
+    link: RouteEnum.CREATE_EVENT
   },
   {
     name: "My Profile",
-    link: RouteType.PROFILE
+    link: RouteEnum.PROFILE
   }
 ]

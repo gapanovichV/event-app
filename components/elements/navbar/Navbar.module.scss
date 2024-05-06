@@ -3,3 +3,9 @@
   align-items: center;
   gap: 20px;
 }
+
+.nav_link {
+  &__selected {
+    color: rgba(238, 59, 146, 0.96);
+  }
+}

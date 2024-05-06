@@ -1,6 +1,6 @@
 import clsx from "clsx"
 import Link from "next/link"
-import { RouteType } from "@/types/route"
+import { RouteEnum } from "@/types/route.interface"
 import style from "./Logo.module.scss"
 
 interface LogoProps {
@@ -8,7 +8,7 @@ interface LogoProps {
 }
 const Logo = ({ className }: LogoProps) => {
   return (
-    <Link className={clsx(style.logo)} href={RouteType.MAIN}>
+    <Link className={clsx(style.logo)} href={RouteEnum.MAIN}>
       Eventhard
     </Link>
   )
