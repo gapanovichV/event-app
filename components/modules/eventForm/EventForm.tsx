@@ -1,5 +1,4 @@
 "use client"
-
 import { z } from "zod"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { IEvent } from "@/lib/database/models/event.nodel"
@@ -12,11 +11,12 @@ interface EventFormProps {
   type: "Create" | "Update"
   eventId?: string
   event?: IEvent
+  userId: any
 }
 
 export type FormScheme = z.infer<typeof eventFormSchema>
 
-const EventForm = ({ type, event }: EventFormProps) => {
+const EventForm = ({ type, event, userId }: EventFormProps) => {
   const initialValues =
     event && type === "Update"
       ? { ...event, startDate: new Date(event.startDate), endDate: new Date(event.endDate) }
