@@ -1,4 +1,5 @@
 export interface ICreateEvent {
+  userId: string
   event: {
     title: string
     description?: string
