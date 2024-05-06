@@ -3,6 +3,7 @@ import type { Metadata } from "next"
 import { ClerkProvider } from "@clerk/nextjs"
 import { Inter } from "next/font/google"
 import "./globalStyles/index.scss"
+import { FormProvider, useForm } from "react-hook-form"
 
 const inter = Inter({ subsets: ["latin"] })
 
