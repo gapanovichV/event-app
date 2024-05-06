@@ -1,8 +1,22 @@
-import Link from "next/link"
-import { RouteType } from "@/types/route"
+"use client"
 
+import Link from "next/link"
+import clsx from "clsx"
+import { RouteEnum } from "@/types/route.interface"
+import { SignedOut, SignedIn } from "@clerk/clerk-react"
+import styles from "./Login.module.scss"
 const Login = () => {
-  return <Link href={RouteType.SIGN_IN}>Sign-in</Link>
+  return (
+    <div className={clsx(styles.login)}>
+      <SignedOut>
+        <Link href={RouteEnum.SIGN_IN}>Login</Link>
+      </SignedOut>
+      <SignedIn>
+        Profile
+      </SignedIn>
+    </div>
+
+  )
 }
 
 export default Login

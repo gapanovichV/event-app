@@ -1,6 +1,6 @@
-import { RouteType } from "@/types/route"
+import { RouteEnum } from "@/types/route.interface"
 
 export interface IMenuItem {
-  link: RouteType
+  link: RouteEnum
   name: string
 }
