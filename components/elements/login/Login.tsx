@@ -11,11 +11,8 @@ const Login = () => {
       <SignedOut>
         <Link href={RouteEnum.SIGN_IN}>Login</Link>
       </SignedOut>
-      <SignedIn>
-        Profile
-      </SignedIn>
+      <SignedIn>Profile</SignedIn>
     </div>
-
   )
 }
 
