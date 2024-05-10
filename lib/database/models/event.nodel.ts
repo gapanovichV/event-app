@@ -12,6 +12,7 @@ export interface IEvent extends Document {
   price: string
   isFree: boolean
   categories: { _id: string; name: string }
+
 }
 
 const eventSchema = new Schema<IEvent>({
