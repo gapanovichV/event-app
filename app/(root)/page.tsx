@@ -1,6 +1,6 @@
 import React from "react"
-import MainPage from "@/components/templates/MainPage/MainPage"
+import EventPage from "@/components/templates/EventPage/EventPage"
 
 export default function HomePage() {
-  return <MainPage />
+  return <EventPage />
 }

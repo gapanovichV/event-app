@@ -13,19 +13,20 @@ import Input from "@/components/elements/formField/input"
 import ErrorMassage from "@/components/elements/formField/errorMassage"
 import FileUploader from "@/components/elements/formField/fileUploader"
 import TextArea from "@/components/elements/formField/textArea"
-import { createEvent } from "@/lib/actions/event.actions"
+import { createEvent, updateEvent } from "@/lib/actions/event.actions"
+import { handleError } from "@/lib/utils"
 import { router } from "next/client"
 
 interface EventFormProps {
   type: "Create" | "Update"
   eventId?: string
   event?: IEvent
-  userId: any
+  userId: string
 }
 
 export type FormScheme = z.infer<typeof eventFormSchema>
 
-const EventForm = ({ type, event, userId }: EventFormProps) => {
+const EventForm = ({ type, event, userId, eventId }: EventFormProps) => {
   const [files, setFiles] = useState<string>(event?.imageUrl || "")
   const initialValues =
     event && type === "Update"
@@ -43,29 +44,44 @@ const EventForm = ({ type, event, userId }: EventFormProps) => {
   })
 
   const onSubmit: SubmitHandler<FormScheme> = async (data) => {
-    console.log("@data", data)
-    console.log("@type: ", type)
-
+    console.log("userId", userId, typeof userId)
     if (type === "Create") {
-      console.log("@newEvent")
       try {
-        console.log("@TRY")
         const newEvent = await createEvent({
           event: {
             ...data,
             imageUrl: files,
             categoriesId: ""
           },
-          userId
+          userId, path: "/"
         })
-
-        console.log("@newEvent", newEvent)
         if (newEvent) {
           reset()
           setFiles("")
         }
-      } catch (e) {
-        console.log(e)
+      } catch (error) {
+        handleError(error)
+      }
+    }
+    if (type === "Update") {
+      if (!eventId) {
+        router.back()
+        return
+      }
+      try {
+        const updatedEvent  = await updateEvent({
+          userId,
+          event: {
+            ...data, imageUrl: files, categoriesId: "", _id: eventId
+          },
+          path: `/events/${eventId}`
+        })
+        if(updatedEvent ) {
+          reset()
+          setFiles("")
+        }
+      } catch (error) {
+        handleError(error)
       }
     }
   }
