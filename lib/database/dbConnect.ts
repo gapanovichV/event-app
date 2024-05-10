@@ -13,15 +13,14 @@ if (!cached) {
 }
 
 async function dbConnect() {
-  if (cached.conn) {
-    return cached.conn
-  }
+  if (cached.conn) return cached.conn
+
   if (!cached.promise) {
     const opts = {
+      dbName: "Event_Hard",
       bufferCommands: false
     }
     cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
-      console.log("Database Connected")
       return mongoose
     })
   }
