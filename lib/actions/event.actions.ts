@@ -6,7 +6,7 @@ import Event from "@/lib/database/models/event.nodel"
 import { handleError } from "@/lib/utils"
 import { revalidatePath } from "next/cache"
 
-export async function createEvent({ userId, event, path }: ICreateEvent) {
+export async function createEvent({event, path }: ICreateEvent) {
   try {
     await dbConnect()
     const newEvent = await Event.create({...event })
@@ -27,7 +27,7 @@ export async function getEventById(eventId: string ) {
   }
 }
 
-export async function updateEvent({ userId, event, path }: IUpdateEvent) {
+export async function updateEvent({event, path }: IUpdateEvent) {
   try {
     await dbConnect()
     const eventToUpdate = await Event.findById(event._id)

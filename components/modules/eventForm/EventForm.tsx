@@ -21,7 +21,7 @@ interface EventFormProps {
   type: "Create" | "Update"
   eventId?: string
   event?: IEvent
-  userId: string
+  userId?: string
 }
 
 export type FormScheme = z.infer<typeof eventFormSchema>
@@ -53,7 +53,7 @@ const EventForm = ({ type, event, userId, eventId }: EventFormProps) => {
             imageUrl: files,
             categoriesId: ""
           },
-          userId, path: "/"
+          path: "/"
         })
         if (newEvent) {
           reset()
@@ -70,7 +70,6 @@ const EventForm = ({ type, event, userId, eventId }: EventFormProps) => {
       }
       try {
         const updatedEvent  = await updateEvent({
-          userId,
           event: {
             ...data, imageUrl: files, categoriesId: "", _id: eventId
           },
