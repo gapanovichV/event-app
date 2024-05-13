@@ -1,5 +1,5 @@
 export interface ICreateEvent {
-  userId: string
+  userId?: string
   event: {
     title: string
     description?: string
@@ -15,7 +15,7 @@ export interface ICreateEvent {
 }
 
 export interface IUpdateEvent {
-  userId: string
+  userId?: string
   event: {
     _id: string
     title: string

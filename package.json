@@ -10,7 +10,6 @@
     "format": "prettier --write **/*.{ts,tsx,css,mdx}"
   },
   "dependencies": {
-    "@clerk/nextjs": "^5.0.6",
     "@hookform/resolvers": "^3.3.4",
     "@uploadthing/react": "^6.5.3",
     "mongoose": "^8.3.3",
