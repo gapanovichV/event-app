@@ -20,7 +20,10 @@ interface FileUploaderProps {
 }
 
 const FileUploader = React.forwardRef(
-  ({ className, error, setFiles, imageUrl, onFieldChange }: FileUploaderProps) => {
+  (
+    { className, error, setFiles, imageUrl, onFieldChange }: FileUploaderProps,
+    ref: React.ForwardedRef<HTMLDivElement>
+  ) => {
     const onDrop = useCallback((acceptedFiles: FileWithPath[]) => {
       setFiles(acceptedFiles)
       onFieldChange(convertFileToUrl(acceptedFiles[0]))
@@ -33,7 +36,7 @@ const FileUploader = React.forwardRef(
 
     return (
       <>
-        <div {...getRootProps()}>
+        <div {...getRootProps()} ref={ref}>
           <input {...getInputProps()} />
           {imageUrl ? (
             <div>

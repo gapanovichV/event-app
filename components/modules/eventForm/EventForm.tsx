@@ -140,6 +140,7 @@ const EventForm = ({ type, event, userId, eventId }: EventFormProps) => {
                 {...field}
                 label="description:"
                 placeholder="description..."
+                component="textarea"
                 type="text"
                 {...(fieldState.error && { error: fieldState.error.message })}
               />

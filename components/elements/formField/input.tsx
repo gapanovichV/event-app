@@ -23,11 +23,11 @@ const Input = React.forwardRef(
     const Component = component || "input"
 
     return (
-      <div className={clsx(styles.container, { [styles.error]: !!error })}>
+      <>
         {label && <label htmlFor={id}>{label}</label>}
         <Component className={clsx(styles.input, className)} id={id} {...props} ref={ref} />
         {error && <span className={clsx(styles.error, className)}>{error}</span>}
-      </div>
+      </>
     )
   }
 ) as <Component extends keyof JSX.IntrinsicElements | React.JSXElementConstructor<any> = "input">(
