@@ -3,7 +3,6 @@ import ReactDatePicker from "react-datepicker"
 import type { ControllerRenderProps, FieldValues } from "react-hook-form"
 import clsx from "clsx"
 
-import "react-datepicker/dist/react-datepicker.css"
 import styles from "./FormField.module.scss"
 
 interface DatePickerProps {
