@@ -1,5 +1,6 @@
+import type { FieldError } from "react-hook-form"
 import clsx from "clsx"
-import { FieldError } from "react-hook-form"
+
 import styles from "./FormField.module.scss"
 
 interface ErrorMassageProps {

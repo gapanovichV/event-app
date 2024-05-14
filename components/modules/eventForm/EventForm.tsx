@@ -1,21 +1,23 @@
 "use client"
 
 import React, { useState } from "react"
-import { z } from "zod"
-import { SubmitHandler, useForm } from "react-hook-form"
-import { IEvent } from "@/lib/database/models/event.nodel"
-import { EventDefaultValue } from "@/components/modules/eventForm/eventForm.data"
-import { eventFormSchema } from "@/types/z.types"
+import type { SubmitHandler } from "react-hook-form"
+import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import FormField from "@/components/elements/formField/formField"
-import Label from "@/components/elements/formField/label"
-import Input from "@/components/elements/formField/input"
+import { router } from "next/client"
+import type { z } from "zod"
+
 import ErrorMassage from "@/components/elements/formField/errorMassage"
 import FileUploader from "@/components/elements/formField/fileUploader"
+import FormField from "@/components/elements/formField/formField"
+import Input from "@/components/elements/formField/input"
+import Label from "@/components/elements/formField/label"
 import TextArea from "@/components/elements/formField/textArea"
+import { EventDefaultValue } from "@/components/modules/eventForm/eventForm.data"
 import { createEvent, updateEvent } from "@/lib/actions/event.actions"
+import type { IEvent } from "@/lib/database/models/event.nodel"
 import { handleError } from "@/lib/utils"
-import { router } from "next/client"
+import { eventFormSchema } from "@/types/z.types"
 
 interface EventFormProps {
   type: "Create" | "Update"
@@ -37,14 +39,13 @@ const EventForm = ({ type, event, userId, eventId }: EventFormProps) => {
     handleSubmit,
     register,
     reset,
-    formState: { errors, isSubmitting }
+    formState: { errors }
   } = useForm<FormScheme>({
     resolver: zodResolver(eventFormSchema),
     defaultValues: initialValues
   })
 
   const onSubmit: SubmitHandler<FormScheme> = async (data) => {
-    console.log("userId", userId, typeof userId)
     if (type === "Create") {
       try {
         const newEvent = await createEvent({
@@ -69,13 +70,16 @@ const EventForm = ({ type, event, userId, eventId }: EventFormProps) => {
         return
       }
       try {
-        const updatedEvent  = await updateEvent({
+        const updatedEvent = await updateEvent({
           event: {
-            ...data, imageUrl: files, categoriesId: "", _id: eventId
+            ...data,
+            imageUrl: files,
+            categoriesId: "",
+            _id: eventId
           },
           path: `/events/${eventId}`
         })
-        if(updatedEvent ) {
+        if (updatedEvent) {
           reset()
           setFiles("")
         }

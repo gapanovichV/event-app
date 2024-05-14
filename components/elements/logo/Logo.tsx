@@ -1,6 +1,8 @@
 import clsx from "clsx"
 import Link from "next/link"
+
 import { RouteEnum } from "@/types/route.interface"
+
 import style from "./Logo.module.scss"
 
 interface LogoProps {

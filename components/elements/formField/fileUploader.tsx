@@ -1,7 +1,8 @@
-import React, { Dispatch, useCallback } from "react"
-import Image from "next/image"
+import type { Dispatch } from "react"
+import React, { useCallback } from "react"
 import { useDropzone } from "@uploadthing/react"
 import { generateClientDropzoneAccept } from "@uploadthing/shared"
+import Image from "next/image"
 
 interface FileUploaderProps {
   className?: string
@@ -9,7 +10,7 @@ interface FileUploaderProps {
   setFile: Dispatch<React.SetStateAction<any>>
 }
 
-const FileUploader = ({ className, imageUrl, setFile }: FileUploaderProps) => {
+const FileUploader = ({ imageUrl, setFile }: FileUploaderProps) => {
   const onDrop = useCallback((acceptedFiles: File[]) => {
     const file = acceptedFiles[0]
     const reader = new FileReader()

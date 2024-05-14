@@ -1,39 +1,42 @@
 "use server"
 
-import dbConnect from "@/lib/database/dbConnect"
-import { ICreateEvent, IDeleteEvent, IUpdateEvent } from "@/types/event.actions.type"
-import Event from "@/lib/database/models/event.nodel"
-import { handleError } from "@/lib/utils"
 import { revalidatePath } from "next/cache"
 
-export async function createEvent({event, path }: ICreateEvent) {
+import dbConnect from "@/lib/database/dbConnect"
+import Event from "@/lib/database/models/event.nodel"
+import { handleError } from "@/lib/utils"
+import type { ICreateEvent, IDeleteEvent, IUpdateEvent } from "@/types/event.actions.type"
+
+export async function createEvent({ event, path }: ICreateEvent) {
   try {
     await dbConnect()
-    const newEvent = await Event.create({...event })
+    const newEvent = await Event.create({ ...event })
+
     return JSON.parse(JSON.stringify(newEvent))
   } catch (error) {
     handleError(error)
   }
 }
 
-export async function getEventById(eventId: string ) {
+export async function getEventById(eventId: string) {
   try {
     await dbConnect()
     const event = await Event.findById(eventId)
     if (!event) throw new Error(`Event not found`)
+
     return JSON.parse(JSON.stringify(event))
   } catch (error) {
     handleError(error)
   }
 }
 
-export async function updateEvent({event, path }: IUpdateEvent) {
+export async function updateEvent({ event, path }: IUpdateEvent) {
   try {
     await dbConnect()
     const eventToUpdate = await Event.findById(event._id)
     if (!eventToUpdate) throw new Error("Event not found")
 
-    const updateEvent = await Event.findByIdAndUpdate(event._id, {...event}, {new: true})
+    const updateEvent = await Event.findByIdAndUpdate(event._id, { ...event }, { new: true })
     return JSON.parse(JSON.stringify(updateEvent))
   } catch (error) {
     handleError(error)

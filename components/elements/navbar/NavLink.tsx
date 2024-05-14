@@ -1,11 +1,13 @@
 "use client"
 
-import Link from "next/link"
-import { RouteEnum } from "@/types/route.interface"
 import clsx from "clsx"
-import styles from "./Navbar.module.scss"
-import { IMenuItem } from "@/components/elements/navbar/menu.interface"
+import Link from "next/link"
 import { usePathname } from "next/navigation"
+
+import type { IMenuItem } from "@/components/elements/navbar/menu.interface"
+import { RouteEnum } from "@/types/route.interface"
+
+import styles from "./Navbar.module.scss"
 
 interface NavLinkProps {
   item: IMenuItem
