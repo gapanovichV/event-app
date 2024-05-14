@@ -8,7 +8,7 @@ interface CreateProps {
   className?: string
 }
 
-const Create = ({ className }: CreateProps) => {
+const CreatePage = ({ className }: CreateProps) => {
   return (
     <div className={clsx(styles.create)}>
       <div className={clsx("container", styles.create_container)}>
@@ -19,4 +19,4 @@ const Create = ({ className }: CreateProps) => {
   )
 }
 
-export default Create
+export default CreatePage

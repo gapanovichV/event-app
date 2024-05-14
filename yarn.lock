@@ -509,10 +509,10 @@
   dependencies:
     file-selector "^0.6.0"
 
-"@uploadthing/mime-types@0.2.9":
-  version "0.2.9"
-  resolved "https://registry.yarnpkg.com/@uploadthing/mime-types/-/mime-types-0.2.9.tgz#9f0818bad21b5793d2b80051cf279d941316944f"
-  integrity sha512-7Ap2evP+niXNSXoOck4DUZUAKYrMRRpJ85n+ZxCuRsnr3iziOgv/Rt6es5SnMVgE/aOObxddOxbrxyOhISQWHQ==
+"@uploadthing/mime-types@0.2.10":
+  version "0.2.10"
+  resolved "https://registry.yarnpkg.com/@uploadthing/mime-types/-/mime-types-0.2.10.tgz#169edb30f1aa52f828e37acfe5121432493efe01"
+  integrity sha512-kz3F0oEgAyts25NAGXlUBCWh3mXonbSOQJFGFMawHuIgbUbnzXbe4w5WI+0XdneCbjNmikfWrdWrs8m/7HATfQ==
 
 "@uploadthing/react@^6.5.3":
   version "6.5.3"
@@ -532,6 +532,14 @@
     "@effect/schema" "^0.66.12"
     effect "^3.1.0"
     fast-check "^3.18.0"
+    std-env "^3.7.0"
+
+"@uploadthing/shared@6.7.4":
+  version "6.7.4"
+  resolved "https://registry.yarnpkg.com/@uploadthing/shared/-/shared-6.7.4.tgz#5bb3097d1654c45e927133f6008f4aacc052125c"
+  integrity sha512-7e35U7/84qQQx+bhldSdze9ODiAo4NCCZiYEV3NomD44O9fE5bfQXcCPtBeXh3y3udf7S28PMZbT6ybJeuKfgw==
+  dependencies:
+    effect "^3.1.0"
     std-env "^3.7.0"
 
 acorn-jsx@^5.3.2:
@@ -2864,14 +2872,14 @@ undici-types@~5.26.4:
   resolved "https://registry.yarnpkg.com/undici-types/-/undici-types-5.26.5.tgz#bcd539893d00b56e964fd2657a4866b221a65617"
   integrity sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==
 
-uploadthing@^6.10.3:
-  version "6.10.3"
-  resolved "https://registry.yarnpkg.com/uploadthing/-/uploadthing-6.10.3.tgz#bc3bbcba23686799e7db9cf7049146db62666bd4"
-  integrity sha512-0TvK8IvJbdCDYcRmDzZWeOZDLFDxU7Eoh+e0mJPeustsA9bXHZgozdBHGh0uLM//tNXB+iv4TqabT31YlU810g==
+uploadthing@^6.10.4:
+  version "6.10.4"
+  resolved "https://registry.yarnpkg.com/uploadthing/-/uploadthing-6.10.4.tgz#15af813db798396d75049b4b024bed0176a2b6b6"
+  integrity sha512-0hGO0Q7R7MnxzVkUbYHE6PkwFieYH+UUa905uo7JtA0h3Gpc89bNDFaOfK8634Z66088VRLNVuWxY2FTIqw4sg==
   dependencies:
     "@effect/schema" "^0.66.12"
-    "@uploadthing/mime-types" "0.2.9"
-    "@uploadthing/shared" "6.7.3"
+    "@uploadthing/mime-types" "0.2.10"
+    "@uploadthing/shared" "6.7.4"
     consola "^3.2.3"
     effect "^3.1.0"
     fast-check "^3.18.0"

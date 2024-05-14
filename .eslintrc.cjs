@@ -7,8 +7,8 @@ module.exports = {
     {
       files: ['*.ts', '*.tsx', '*.js'],
       rules: {
-        "@typescript-eslint/no-misused-promises": "off",
-        "@typescript-eslint/no-unused-vars": "warn",
+        "@typescript-eslint/no-misused-promises": 'off',
+        "@typescript-eslint/no-unused-vars": 'warn',
         '@typescript-eslint/await-thenable': 'off',
         '@typescript-eslint/no-unsafe-assignment': 'off',
         '@typescript-eslint/no-unsafe-member-access': 'off',
@@ -19,7 +19,7 @@ module.exports = {
         '@typescript-eslint/naming-convention': 'off',
         'no-underscore-dangle': 'off',
         'no-restricted-syntax': 'off',
-        "no-multi-assign": "off",
+        "no-multi-assign": 'off',
         'promise/always-return': ['error', { ignoreLastCallback: true }]
       }
     }
