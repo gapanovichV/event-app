@@ -11,7 +11,7 @@ interface UpdateProps {
   className?: string
 }
 
-const Update = ({ className, params: { id } }: UpdateProps) => {
+const UpdatePage = ({ className, params: { id } }: UpdateProps) => {
   return (
     <div className={clsx(styles.create, className)}>
       <div className={clsx("container", styles.update_container)}>
@@ -22,4 +22,4 @@ const Update = ({ className, params: { id } }: UpdateProps) => {
   )
 }
 
-export default Update
+export default UpdatePage

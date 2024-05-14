@@ -7,6 +7,7 @@ import Navbar from "@/components/elements/navbar/Navbar"
 import styles from "./Header.module.scss"
 
 interface HeaderProps {}
+
 const Header = () => {
   return (
     <header className={clsx(styles.header)}>

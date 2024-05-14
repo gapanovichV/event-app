@@ -1,27 +1,29 @@
-import type { UseFormRegister } from "react-hook-form"
+import React, { useId } from "react"
 import clsx from "clsx"
-
-import type { TFormField } from "@/components/elements/formField/formField.interface"
-import type { FormScheme } from "@/components/modules/eventForm/EventForm"
 
 import styles from "./FormField.module.scss"
 
-interface InputProps {
+type InputProps<
+  Component extends keyof JSX.IntrinsicElements | React.JSXElementConstructor<any> = "input"
+> = {
+  label?: string
   className?: string
-  type: string
-  placeholder?: string
-  register: UseFormRegister<FormScheme>
-  name: TFormField
-}
+  error?: string
+  component?: Component
+} & React.ComponentProps<Component>
 
-const Input = ({ type, placeholder, register, name, className }: InputProps) => {
+const Input = ({ label, component, id: externalId, error, className, ...props }: InputProps) => {
+  const internalId = useId()
+  const id = externalId && internalId
+
+  const Component = component || "input"
+
   return (
-    <input
-      type={type}
-      placeholder={placeholder}
-      {...register(name)}
-      className={clsx(styles.input, className)}
-    />
+    <>
+      <label htmlFor={id}>{label}</label>
+      <Component className={clsx(styles.input, className)} id={id} {...props} />
+      {error && <span className={clsx(styles.error, className)}>{error}</span>}
+    </>
   )
 }
 

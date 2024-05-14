@@ -1,23 +1,34 @@
-import type { Dispatch } from "react"
+import type { Dispatch, SetStateAction } from "react"
 import React, { useCallback } from "react"
+// @ts-ignore
+import type { FileWithPath } from "@uploadthing/react"
 import { useDropzone } from "@uploadthing/react"
 import { generateClientDropzoneAccept } from "@uploadthing/shared"
+import clsx from "clsx"
 import Image from "next/image"
 
+import { convertFileToUrl } from "@/hooks/utils"
+
+import styles from "@/components/elements/formField/FormField.module.scss"
+
 interface FileUploaderProps {
-  className?: string
+  onFieldChange: (url: string) => void
   imageUrl: string
-  setFile: Dispatch<React.SetStateAction<any>>
+  setFiles: Dispatch<SetStateAction<File[]>>
+  className?: string
+  error?: string
 }
 
-const FileUploader = ({ imageUrl, setFile }: FileUploaderProps) => {
-  const onDrop = useCallback((acceptedFiles: File[]) => {
-    const file = acceptedFiles[0]
-    const reader = new FileReader()
-    reader.readAsDataURL(file)
-    reader.onloadend = () => {
-      setFile(reader.result)
-    }
+const FileUploader = ({
+  className,
+  error,
+  setFiles,
+  imageUrl,
+  onFieldChange
+}: FileUploaderProps) => {
+  const onDrop = useCallback((acceptedFiles: FileWithPath[]) => {
+    setFiles(acceptedFiles)
+    onFieldChange(convertFileToUrl(acceptedFiles[0]))
   }, [])
 
   const { getRootProps, getInputProps } = useDropzone({
@@ -26,18 +37,21 @@ const FileUploader = ({ imageUrl, setFile }: FileUploaderProps) => {
   })
 
   return (
-    <div {...getRootProps()}>
-      <input {...getInputProps()} />
-      {imageUrl ? (
-        <div>
-          <Image width={250} height={250} src={imageUrl} alt="image" />
-        </div>
-      ) : (
-        <div>
-          <h3>Drop files here!</h3>
-        </div>
-      )}
-    </div>
+    <>
+      <div {...getRootProps()}>
+        <input {...getInputProps()} />
+        {imageUrl ? (
+          <div>
+            <Image width={250} height={250} src={imageUrl} alt="image" />
+          </div>
+        ) : (
+          <div>
+            <h3>Drop files here!</h3>
+          </div>
+        )}
+      </div>
+      {error && <span className={clsx(styles.error, className)}>{error}</span>}
+    </>
   )
 }
 

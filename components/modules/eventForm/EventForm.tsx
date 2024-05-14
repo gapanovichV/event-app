@@ -2,22 +2,20 @@
 
 import React, { useState } from "react"
 import type { SubmitHandler } from "react-hook-form"
-import { useForm } from "react-hook-form"
+import { Controller, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { router } from "next/client"
 import type { z } from "zod"
 
-import ErrorMassage from "@/components/elements/formField/errorMassage"
 import FileUploader from "@/components/elements/formField/fileUploader"
 import FormField from "@/components/elements/formField/formField"
 import Input from "@/components/elements/formField/input"
-import Label from "@/components/elements/formField/label"
-import TextArea from "@/components/elements/formField/textArea"
 import { EventDefaultValue } from "@/components/modules/eventForm/eventForm.data"
 import { createEvent, updateEvent } from "@/lib/actions/event.actions"
 import type { IEvent } from "@/lib/database/models/event.nodel"
 import { handleError } from "@/lib/utils"
 import { eventFormSchema } from "@/types/z.types"
+import { useUploadThing } from "@/lib/uploadthing"
 
 interface EventFormProps {
   type: "Create" | "Update"
@@ -29,36 +27,46 @@ interface EventFormProps {
 export type FormScheme = z.infer<typeof eventFormSchema>
 
 const EventForm = ({ type, event, userId, eventId }: EventFormProps) => {
-  const [files, setFiles] = useState<string>(event?.imageUrl || "")
+  const [files, setFiles] = useState<File[]>([])
   const initialValues =
     event && type === "Update"
       ? { ...event, startDate: new Date(event.startDate), endDate: new Date(event.endDate) }
       : EventDefaultValue
 
-  const {
-    handleSubmit,
-    register,
-    reset,
-    formState: { errors }
-  } = useForm<FormScheme>({
+  const { startUpload } = useUploadThing("imageUploader")
+
+  const form = useForm<FormScheme>({
     resolver: zodResolver(eventFormSchema),
     defaultValues: initialValues
   })
 
   const onSubmit: SubmitHandler<FormScheme> = async (data) => {
+    console.log(data)
+
+    let uploadedImageUrl = data.imageUrl
+
+    if (files.length > 0) {
+      const uploadedImages = await startUpload(files)
+
+      if (!uploadedImages) {
+        return
+      }
+
+      uploadedImageUrl = uploadedImages[0].url
+    }
+
     if (type === "Create") {
       try {
         const newEvent = await createEvent({
           event: {
             ...data,
-            imageUrl: files,
+            imageUrl: uploadedImageUrl,
             categoriesId: ""
           },
           path: "/"
         })
         if (newEvent) {
-          reset()
-          setFiles("")
+          form.reset()
         }
       } catch (error) {
         handleError(error)
@@ -73,15 +81,14 @@ const EventForm = ({ type, event, userId, eventId }: EventFormProps) => {
         const updatedEvent = await updateEvent({
           event: {
             ...data,
-            imageUrl: files,
+            imageUrl: uploadedImageUrl,
             categoriesId: "",
             _id: eventId
           },
           path: `/events/${eventId}`
         })
         if (updatedEvent) {
-          reset()
-          setFiles("")
+          form.reset()
         }
       } catch (error) {
         handleError(error)
@@ -90,29 +97,89 @@ const EventForm = ({ type, event, userId, eventId }: EventFormProps) => {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={form.handleSubmit(onSubmit)}>
       <FormField>
-        <Label>Title:</Label>
-        <Input type="text" register={register} name="title" />
-        <ErrorMassage error={errors.title} />
+        <Controller
+          name="title"
+          control={form.control}
+          render={({ field, fieldState }) => (
+            <>
+              <Input
+                {...field}
+                label="Title:"
+                placeholder="Title..."
+                type="text"
+                {...(fieldState.error && { error: fieldState.error.message })}
+              />
+            </>
+          )}
+        />
       </FormField>
       <FormField>
-        <FileUploader imageUrl={files} setFile={setFiles} />
+        <Controller
+          name="imageUrl"
+          control={form.control}
+          render={({ field, fieldState }) => (
+            <FileUploader
+              {...field}
+              imageUrl={field.value}
+              setFiles={setFiles}
+              onFieldChange={field.onChange}
+              {...(fieldState.error && { error: fieldState.error.message })}
+            />
+          )}
+        />
       </FormField>
       <FormField>
-        <Label>Description:</Label>
-        <TextArea register={register} name="description" />
-        <ErrorMassage error={errors.description} />
+        <Controller
+          name="description"
+          control={form.control}
+          render={({ field, fieldState }) => (
+            <>
+              <Input
+                {...field}
+                label="description:"
+                placeholder="description..."
+                type="text"
+                {...(fieldState.error && { error: fieldState.error.message })}
+              />
+            </>
+          )}
+        />
       </FormField>
       <FormField>
-        <Label>Price:</Label>
-        <Input type="text" register={register} name="price" />
-        <ErrorMassage error={errors.price} />
+        <Controller
+          name="price"
+          control={form.control}
+          render={({ field, fieldState }) => (
+            <>
+              <Input
+                {...field}
+                label="price:"
+                placeholder="price..."
+                type="text"
+                {...(fieldState.error && { error: fieldState.error.message })}
+              />
+            </>
+          )}
+        />
       </FormField>
       <FormField>
-        <Label>Location:</Label>
-        <Input type="text" register={register} name="location" />
-        <ErrorMassage error={errors.location} />
+        <Controller
+          name="location"
+          control={form.control}
+          render={({ field, fieldState }) => (
+            <>
+              <Input
+                {...field}
+                label="location:"
+                placeholder="location..."
+                type="text"
+                {...(fieldState.error && { error: fieldState.error.message })}
+              />
+            </>
+          )}
+        />
       </FormField>
 
       <button type="submit">Submit</button>
