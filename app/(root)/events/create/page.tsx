@@ -1,6 +1,8 @@
 import clsx from "clsx"
-import styles from "./Create.module.scss"
+
 import EventForm from "@/components/modules/eventForm/EventForm"
+
+import styles from "./Create.module.scss"
 
 interface CreateProps {
   className?: string

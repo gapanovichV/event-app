@@ -1,7 +1,3 @@
 export default function Page() {
-  return (
-    <div style={{ display: "grid", justifyContent: "center" }}>
-      SIGN-IN
-    </div>
-  )
+  return <div style={{ display: "grid", justifyContent: "center" }}>SIGN-IN</div>
 }

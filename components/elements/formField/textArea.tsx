@@ -1,7 +1,9 @@
+import type { UseFormRegister } from "react-hook-form"
 import clsx from "clsx"
-import { UseFormRegister } from "react-hook-form"
-import { FormScheme } from "@/components/modules/eventForm/EventForm"
-import { TFormField } from "@/components/elements/formField/formField.interface"
+
+import type { TFormField } from "@/components/elements/formField/formField.interface"
+import type { FormScheme } from "@/components/modules/eventForm/EventForm"
+
 import styles from "./FormField.module.scss"
 
 interface TextAreaProps {
@@ -11,12 +13,12 @@ interface TextAreaProps {
   name: TFormField
 }
 
-const TextArea = ({ placeholder, register, name, className }: TextAreaProps) => {
+const TextArea = ({ placeholder, name, register, className }: TextAreaProps) => {
   return (
     <textarea
+      className={clsx(styles.input, className)}
       placeholder={placeholder}
       {...register(name)}
-      className={clsx(styles.input, className)}
     />
   )
 }

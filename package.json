@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "lint:fix": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "format": "prettier --write **/*.{ts,tsx,css,mdx}"
   },
   "dependencies": {
@@ -21,16 +22,26 @@
     "zod": "^3.23.6"
   },
   "devDependencies": {
+    "@siberiacancode/eslint": "^1.1.0",
     "@types/mongoose": "^5.11.97",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@typescript-eslint/eslint-plugin": "^7.2.0",
+    "@typescript-eslint/parser": "^7.2.0",
     "clsx": "^2.1.1",
     "eslint": "^8",
+    "eslint-config-airbnb-typescript": "^18.0.0",
     "eslint-config-next": "14.2.3",
     "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "eslint-plugin-react-refresh": "^0.4.7",
     "prettier": "^3.2.5",
     "sass": "^1.75.0",
     "typescript": "^5"
-  }
+  },
+  "main": "index.js",
+  "repository": "https://github.com/gapanovichV/event-app.git",
+  "author": "Vlad Gapanovich <vladgapanovich172@gmail.com>",
+  "license": "MIT"
 }

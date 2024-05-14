@@ -1,4 +1,4 @@
-import { IMenuItem } from "@/components/elements/navbar/menu.interface"
+import type { IMenuItem } from "@/components/elements/navbar/menu.interface"
 import { RouteEnum } from "@/types/route.interface"
 
 export const menu: IMenuItem[] = [
