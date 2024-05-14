@@ -19,40 +19,36 @@ interface FileUploaderProps {
   error?: string
 }
 
-const FileUploader = ({
-  className,
-  error,
-  setFiles,
-  imageUrl,
-  onFieldChange
-}: FileUploaderProps) => {
-  const onDrop = useCallback((acceptedFiles: FileWithPath[]) => {
-    setFiles(acceptedFiles)
-    onFieldChange(convertFileToUrl(acceptedFiles[0]))
-  }, [])
+const FileUploader = React.forwardRef(
+  ({ className, error, setFiles, imageUrl, onFieldChange }: FileUploaderProps) => {
+    const onDrop = useCallback((acceptedFiles: FileWithPath[]) => {
+      setFiles(acceptedFiles)
+      onFieldChange(convertFileToUrl(acceptedFiles[0]))
+    }, [])
 
-  const { getRootProps, getInputProps } = useDropzone({
-    onDrop,
-    accept: "image/*" ? generateClientDropzoneAccept(["image/*"]) : undefined
-  })
+    const { getRootProps, getInputProps } = useDropzone({
+      onDrop,
+      accept: "image/*" ? generateClientDropzoneAccept(["image/*"]) : undefined
+    })
 
-  return (
-    <>
-      <div {...getRootProps()}>
-        <input {...getInputProps()} />
-        {imageUrl ? (
-          <div>
-            <Image width={250} height={250} src={imageUrl} alt="image" />
-          </div>
-        ) : (
-          <div>
-            <h3>Drop files here!</h3>
-          </div>
-        )}
-      </div>
-      {error && <span className={clsx(styles.error, className)}>{error}</span>}
-    </>
-  )
-}
+    return (
+      <>
+        <div {...getRootProps()}>
+          <input {...getInputProps()} />
+          {imageUrl ? (
+            <div>
+              <Image width={250} height={250} src={imageUrl} alt="image" />
+            </div>
+          ) : (
+            <div>
+              <h3>Drop files here!</h3>
+            </div>
+          )}
+        </div>
+        {error && <span className={clsx(styles.error, className)}>{error}</span>}
+      </>
+    )
+  }
+)
 
 export default FileUploader

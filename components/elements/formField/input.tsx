@@ -1,4 +1,4 @@
-import React, { useId } from "react"
+import React from "react"
 import clsx from "clsx"
 
 import styles from "./FormField.module.scss"
@@ -6,25 +6,32 @@ import styles from "./FormField.module.scss"
 type InputProps<
   Component extends keyof JSX.IntrinsicElements | React.JSXElementConstructor<any> = "input"
 > = {
-  label?: string
   className?: string
+  label?: string
   error?: string
   component?: Component
 } & React.ComponentProps<Component>
 
-const Input = ({ label, component, id: externalId, error, className, ...props }: InputProps) => {
-  const internalId = useId()
-  const id = externalId && internalId
+const Input = React.forwardRef(
+  (
+    { label, className, component, error, id: externalId, ...props }: InputProps<"input">,
+    ref: React.ForwardedRef<HTMLInputElement>
+  ) => {
+    const internalId = React.useId()
+    const id = externalId ?? internalId
 
-  const Component = component || "input"
+    const Component = component || "input"
 
-  return (
-    <>
-      <label htmlFor={id}>{label}</label>
-      <Component className={clsx(styles.input, className)} id={id} {...props} />
-      {error && <span className={clsx(styles.error, className)}>{error}</span>}
-    </>
-  )
-}
+    return (
+      <div className={clsx(styles.container, { [styles.error]: !!error })}>
+        {label && <label htmlFor={id}>{label}</label>}
+        <Component className={clsx(styles.input, className)} id={id} {...props} ref={ref} />
+        {error && <span className={clsx(styles.error, className)}>{error}</span>}
+      </div>
+    )
+  }
+) as <Component extends keyof JSX.IntrinsicElements | React.JSXElementConstructor<any> = "input">(
+  props: InputProps<Component> & { ref?: React.ForwardedRef<HTMLInputElement> }
+) => React.ReactElement
 
 export default Input
