@@ -16,6 +16,8 @@ import type { IEvent } from "@/lib/database/models/event.nodel"
 import { handleError } from "@/lib/utils"
 import { eventFormSchema } from "@/types/z.types"
 import { useUploadThing } from "@/lib/uploadthing"
+import ReactDatePicker from "react-datepicker"
+import DatePicker from "@/components/elements/formField/DatePicker"
 
 interface EventFormProps {
   type: "Create" | "Update"
@@ -103,15 +105,29 @@ const EventForm = ({ type, event, userId, eventId }: EventFormProps) => {
           name="title"
           control={form.control}
           render={({ field, fieldState }) => (
-            <>
-              <Input
-                {...field}
-                label="Title:"
-                placeholder="Title..."
-                type="text"
-                {...(fieldState.error && { error: fieldState.error.message })}
-              />
-            </>
+            <Input
+              {...field}
+              label="Title:"
+              placeholder="Title..."
+              type="text"
+              {...(fieldState.error && { error: fieldState.error.message })}
+            />
+          )}
+        />
+      </FormField>
+      <FormField>
+        <Controller
+          name="description"
+          control={form.control}
+          render={({ field, fieldState }) => (
+            <Input
+              {...field}
+              label="description:"
+              placeholder="description..."
+              component="textarea"
+              type="text"
+              {...(fieldState.error && { error: fieldState.error.message })}
+            />
           )}
         />
       </FormField>
@@ -132,36 +148,16 @@ const EventForm = ({ type, event, userId, eventId }: EventFormProps) => {
       </FormField>
       <FormField>
         <Controller
-          name="description"
-          control={form.control}
-          render={({ field, fieldState }) => (
-            <>
-              <Input
-                {...field}
-                label="description:"
-                placeholder="description..."
-                component="textarea"
-                type="text"
-                {...(fieldState.error && { error: fieldState.error.message })}
-              />
-            </>
-          )}
-        />
-      </FormField>
-      <FormField>
-        <Controller
           name="price"
           control={form.control}
           render={({ field, fieldState }) => (
-            <>
-              <Input
-                {...field}
-                label="price:"
-                placeholder="price..."
-                type="text"
-                {...(fieldState.error && { error: fieldState.error.message })}
-              />
-            </>
+            <Input
+              {...field}
+              label="price:"
+              placeholder="price..."
+              type="text"
+              {...(fieldState.error && { error: fieldState.error.message })}
+            />
           )}
         />
       </FormField>
@@ -170,15 +166,26 @@ const EventForm = ({ type, event, userId, eventId }: EventFormProps) => {
           name="location"
           control={form.control}
           render={({ field, fieldState }) => (
-            <>
-              <Input
-                {...field}
-                label="location:"
-                placeholder="location..."
-                type="text"
-                {...(fieldState.error && { error: fieldState.error.message })}
-              />
-            </>
+            <Input
+              {...field}
+              label="location:"
+              placeholder="location..."
+              type="text"
+              {...(fieldState.error && { error: fieldState.error.message })}
+            />
+          )}
+        />
+      </FormField>
+      <FormField>
+        <Controller
+          name="startDate"
+          control={form.control}
+          render={({ field, fieldState }) => (
+            <DatePicker
+              field={field}
+              {...field}
+              {...(fieldState.error && { error: fieldState.error.message })}
+            />
           )}
         />
       </FormField>

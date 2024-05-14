@@ -9,12 +9,13 @@ type InputProps<
   className?: string
   label?: string
   error?: string
+  type?: string | number
   component?: Component
 } & React.ComponentProps<Component>
 
 const Input = React.forwardRef(
   (
-    { label, className, component, error, id: externalId, ...props }: InputProps<"input">,
+    { label, className, component, error, type, id: externalId, ...props }: InputProps<"input">,
     ref: React.ForwardedRef<HTMLInputElement>
   ) => {
     const internalId = React.useId()
@@ -25,7 +26,13 @@ const Input = React.forwardRef(
     return (
       <>
         {label && <label htmlFor={id}>{label}</label>}
-        <Component className={clsx(styles.input, className)} id={id} {...props} ref={ref} />
+        <Component
+          className={clsx(styles.input, className)}
+          id={id}
+          type={type}
+          {...props}
+          ref={ref}
+        />
         {error && <span className={clsx(styles.error, className)}>{error}</span>}
       </>
     )
